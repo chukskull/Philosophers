@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_usleep.c                                        :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 21:58:11 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 20:51:21 by snagat           ###   ########.fr       */
+/*   Created: 2022/04/06 22:04:55 by snagat            #+#    #+#             */
+/*   Updated: 2022/04/08 23:31:58 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include "utils.h"
+#include "bonus.h"
+#include <sys/time.h>
 
-void	ft_usleep(int time)
+unsigned long	get_time(void)
 {
-	unsigned long	cur_time;
-	unsigned long	breaker;
+	struct timeval	time;
 
-	cur_time = get_time();
-	breaker = cur_time + time;
-	usleep((time - 10) * 1000);
-	while (1)
-	{
-		usleep(50);
-		cur_time = get_time();
-		if (cur_time == breaker)
-			break ;
-	}
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }

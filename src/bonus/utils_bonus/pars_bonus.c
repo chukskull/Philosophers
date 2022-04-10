@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_usleep.c                                        :+:      :+:    :+:   */
+/*   pars_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 21:58:11 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 20:51:21 by snagat           ###   ########.fr       */
+/*   Created: 2022/04/06 21:52:18 by snagat            #+#    #+#             */
+/*   Updated: 2022/04/08 03:40:31 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include "utils.h"
+#include "bonus.h"
 
-void	ft_usleep(int time)
+void	handling(char *av, long *num, int rules, t_rules *input)
 {
-	unsigned long	cur_time;
-	unsigned long	breaker;
-
-	cur_time = get_time();
-	breaker = cur_time + time;
-	usleep((time - 10) * 1000);
-	while (1)
-	{
-		usleep(50);
-		cur_time = get_time();
-		if (cur_time == breaker)
-			break ;
-	}
+	if (rules == 1)
+		input->philos_fork = ft_atoi(av, num);
+	else if (rules == 2)
+		input->time_to_die = ft_atoi(av, num);
+	else if (rules == 3)
+		input->time_to_eat = ft_atoi(av, num);
+	else if (rules == 4)
+		input->time_to_sleep = ft_atoi(av, num);
+	else if (rules == 5)
+		input->number_of_time_eat = ft_atoi(av, num);
 }

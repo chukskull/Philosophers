@@ -6,7 +6,7 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:15:48 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/07 02:42:44 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/10 20:40:18 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-void	create_threads(t_vars *vars, t_rules *input)
+void create_threads(t_vars *vars, t_rules *input)
 {
 	vars->i = 0;
 	while (vars->i < input->philos_fork)
 	{
 		if (pthread_create(&vars->philo[vars->i].thread,
-				NULL, g_rules, &vars->philo[vars->i]) != 0)
-			return ;
+						   NULL, g_rules, &vars->philo[vars->i]) != 0)
+			return;
 		vars->i++;
 	}
 }
 
-void	destroy_mutex(t_vars *vars, t_rules *input)
+void destroy_mutex(t_vars *vars, t_rules *input)
 {
 	vars->i = 0;
 	while (vars->i < input->philos_fork)
@@ -39,7 +39,7 @@ void	destroy_mutex(t_vars *vars, t_rules *input)
 	}
 }
 
-void	init_threads(t_vars *vars, t_rules *input)
+void init_threads(t_vars *vars, t_rules *input)
 {
 	vars->philo = malloc(sizeof(t_philo) * input->philos_fork);
 	vars->i = 0;
@@ -59,25 +59,24 @@ void	init_threads(t_vars *vars, t_rules *input)
 	}
 }
 
-void	thr_begun(t_rules *input)
+void thr_begun(t_rules *input)
 {
-	t_vars	vars;
+	t_vars vars;
 
 	init_threads(&vars, input);
 	create_threads(&vars, input);
 	vars.i = 0;
 	while (1)
 	{
-		if (eat(vars.philo, input)
-			&& vars.philo[vars.i].rules->number_of_time_eat)
-			break ;
+		usleep(100);
+		if (eat(vars.philo, input) && vars.philo[vars.i].rules->number_of_time_eat)
+			break;
 		vars.time = get_time();
-		if (vars.time >= vars.philo[vars.i].last_m
-			+ vars.philo[vars.i].rules->time_to_die)
+		if (vars.time >= vars.philo[vars.i].last_m + vars.philo[vars.i].rules->time_to_die)
 		{
 			vars.philo[vars.i].rules->dead = 1;
 			ft_printf("is dead", &vars.philo[vars.i]);
-			return ;
+			return;
 		}
 		if (vars.i == vars.philo[vars.i].rules->philos_fork - 1)
 			vars.i = 0;
@@ -87,11 +86,11 @@ void	thr_begun(t_rules *input)
 	destroy_mutex(&vars, input);
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	int		i;
-	long	num;
-	t_rules	*input;
+	int i;
+	long num;
+	t_rules *input;
 
 	input = malloc(sizeof(t_rules));
 	i = 1;

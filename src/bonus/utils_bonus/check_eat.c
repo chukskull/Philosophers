@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_usleep.c                                        :+:      :+:    :+:   */
+/*   check_eat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 21:58:11 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 20:51:21 by snagat           ###   ########.fr       */
+/*   Created: 2022/04/06 22:20:43 by snagat            #+#    #+#             */
+/*   Updated: 2022/04/10 16:44:35 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include "utils.h"
+#include "bonus.h"
+#include <stdio.h>
 
-void	ft_usleep(int time)
+int	eat(t_philo *philo, t_rules *rl)
 {
-	unsigned long	cur_time;
-	unsigned long	breaker;
+	int	i;
 
-	cur_time = get_time();
-	breaker = cur_time + time;
-	usleep((time - 10) * 1000);
-	while (1)
+	i = 0;
+	while (i < rl->philos_fork)
 	{
-		usleep(50);
-		cur_time = get_time();
-		if (cur_time == breaker)
-			break ;
+		if (philo->count != rl->number_of_time_eat)
+			return (0);
+		i++;
 	}
+	return (1);
 }

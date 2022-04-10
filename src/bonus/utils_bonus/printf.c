@@ -6,26 +6,28 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 22:09:49 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 20:24:18 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/10 20:02:37 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <stdio.h>
-#include "philo.h"
 #include <sys/time.h>
 #include <unistd.h>
-#include "utils.h"
+#include <semaphore.h>
+#include "bonus.h"
 
-void	ft_printf(char *s, t_philo *philo)
+void	ft_printf_th(char *s, t_philo *philo)
 {
-	pthread_mutex_t	lock;
 
-	pthread_mutex_init(&lock, NULL);
-	pthread_mutex_lock(&lock);
+	usleep(10);
+	printf("[%ld] [%d] %s\n", get_time() - philo->rules->cur_time, philo->id, s);
+}
+
+void	ft_printf(char *s, t_philo *philo, t_vars *vars)
+{
+	sem_wait(vars->lock_printf);
 	printf("[%ld] [%d] %s\n", get_time() - philo->rules->cur_time, philo->id, s);
 	if (philo->rules->dead != 1)
-		pthread_mutex_unlock(&lock);
-	else
-		return ;
+		sem_post(vars->lock_printf);
 }

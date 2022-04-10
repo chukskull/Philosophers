@@ -6,12 +6,13 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 21:58:11 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 20:51:21 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/10 20:56:37 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include "utils.h"
+#include "bonus.h"
+#include <unistd.h>
+#include <sys/time.h>
 
 void	ft_usleep(int time)
 {
