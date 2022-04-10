@@ -6,7 +6,7 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 06:42:29 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 20:57:52 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/10 23:43:24 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void ft_kill(t_philo *philo)
 	i = 0;
 	while (i < philo->rules->philos_fork)
 	{
-		kill(philo[i].pid, SIGTERM);
+		kill(philo[i].pid, SIGKILL);
 		i++;
 	}
+	exit(0);
 }
 
 void *check(void *input)
@@ -50,17 +51,9 @@ void *check(void *input)
 
 void func(t_philo *philo, t_vars *vars)
 {
-	// (void) philo;
-	// while (1)
-	// {
-	// 	sem_wait(vars->sem);
-	// 	printf ("yoo\n");
-	// }
 	pthread_create(vars->check, NULL, check, philo);
 	while (1)
 	{
-		if (philo->rules->number_of_time_eat == philo->count)
-			exit(1);
 		sem_wait(vars->sem);
 		ft_printf("has taken a fork", philo, vars);
 		sem_wait(vars->sem);
@@ -71,6 +64,8 @@ void func(t_philo *philo, t_vars *vars)
 		ft_usleep(philo->rules->time_to_eat);
 		sem_post(vars->sem);
 		sem_post(vars->sem);
+		if (philo->rules->number_of_time_eat == philo->count)
+			exit(1);
 		ft_printf("is sleeping", philo, vars);
 		ft_usleep(philo->rules->time_to_sleep);
 		ft_printf("is thinking", philo, vars);
@@ -93,20 +88,21 @@ void create_process(t_vars *vars, t_rules *input)
 		if (id != 0)
 			id = fork();
 		if (id == 0)
-		{
 			func(&vars->philo[vars->i], vars);
-			return;
-		}
 		else
 			vars->philo[vars->i].pid = id;
 		vars->i++;
 	}
-	waitpid(-1, &status, 0);
-	if (status == 0)
+	vars->i = 0;
+	while (vars->i++ < input->philos_fork)
 	{
-		vars->philo->rules->dead = 1;
-		ft_printf("is dead", vars->philo, vars);
-		ft_kill(vars->philo);
+		waitpid(-1, &status, 0);
+		if (status == 0)
+		{
+			vars->philo->rules->dead = 1;
+			ft_printf("is dead", vars->philo, vars);
+			ft_kill(vars->philo);
+		}
 	}
 }
 
@@ -132,11 +128,10 @@ void fork_begun(t_rules *input)
 	create_process(&vars, input);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int i;
-	long num;
-	t_rules *input;
+	int		i;
+	t_rules	*input;
 
 	input = malloc(sizeof(t_rules));
 	i = 1;
@@ -145,7 +140,7 @@ int main(int ac, char **av)
 		return (1);
 	while (i < ac)
 	{
-		handling(av[i], &num, i, input);
+		handling(av[i], i, input);
 		i++;
 	}
 	fork_begun(input);

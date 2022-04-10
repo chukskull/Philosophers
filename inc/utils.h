@@ -6,7 +6,7 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:06:36 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/07 02:40:11 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/10 21:51:41 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_var
 	t_philo			*philo;
 }	t_vars;
 
-int				ft_atoi(char *str, long *num);
-void			handling(char *av, long *num, int rules, t_rules *input);
+int				ft_atoi(char *str);
+void			handling(char *av, int rules, t_rules *input);
 unsigned long	get_time(void);
 void			ft_printf(char *s, t_philo *philo);
 

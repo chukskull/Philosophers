@@ -6,7 +6,7 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 08:37:40 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 12:05:13 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/10 23:15:22 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 # include <sys/time.h>
 # include <semaphore.h>
-
 
 typedef struct g_rules
 {
@@ -58,13 +57,12 @@ typedef struct s_atoi
 }	t_atoi;
 
 
-int	ft_atoi(char *str, long *num);
-void	handling(char *av, long *num, int rules, t_rules *input);
+int				ft_atoi(char *str);
+void			handling(char *av, int rules, t_rules *input);
 unsigned long	get_time(void);
-void	ft_usleep(int time);
-void	ft_printf(char *s, t_philo *philo, t_vars *vars);
-int		eat(t_philo *philo, t_rules *rl);
-void	ft_printf_th(char *s, t_philo *philo);
+void			ft_usleep(int time);
+void			ft_printf(char *s, t_philo *philo, t_vars *vars);
+int				eat(t_philo *philo, t_rules *rl);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 22:16:12 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 20:31:32 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/10 23:11:37 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include "utils.h"
+#include "philo.h"
 #include <stdio.h>
 
 void	*g_rules(void *philo)

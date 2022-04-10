@@ -6,7 +6,7 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 21:57:56 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/07 02:30:52 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/10 21:50:53 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	var_init(t_atoi *var, char *str)
 	}
 }
 
-int	ft_atoi(char *str, long *num)
+int	ft_atoi(char *str)
 {
 	t_atoi	var;
 
@@ -54,7 +54,6 @@ int	ft_atoi(char *str, long *num)
 		var.resultat *= 10;
 		var.resultat += str[var.i++] - '0';
 	}
-	*num = var.resultat;
-	check_num(*num);
-	return (*num);
+	check_num(var.resultat);
+	return (var.resultat);
 }

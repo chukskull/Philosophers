@@ -6,7 +6,7 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:36:20 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/07 02:37:51 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/10 23:10:21 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct g_rules
 	struct timeval		simulations;
 	unsigned long		cur_time;
 	int					dead;
+	pthread_mutex_t		lock;
 }	t_rules;
 
 typedef struct s_philo
@@ -37,7 +38,6 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	protect;
 	unsigned long	last_m;
 	int				count;
 }	t_philo;
