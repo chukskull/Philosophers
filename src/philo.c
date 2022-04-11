@@ -6,7 +6,7 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:15:48 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 22:19:45 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/11 09:44:16 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	create_threads(t_vars *vars, t_rules *input)
 	while (vars->i < input->philos_fork)
 	{
 		if (pthread_create(&vars->philo[vars->i].thread,
-						   NULL, g_rules, &vars->philo[vars->i]) != 0)
-			return;
+				NULL, g_rules, &vars->philo[vars->i]) != 0)
+			return ;
 		vars->i++;
 	}
 }
@@ -70,7 +70,7 @@ void	thr_begun(t_rules *input)
 	vars.i = 0;
 	while (1)
 	{
-		usleep(100);
+		usleep(200);
 		if (input->number_of_time_eat && eat(vars.philo, input))
 			break ;
 		vars.time = get_time();

@@ -6,13 +6,12 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 08:37:40 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 23:15:22 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/11 10:27:47 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BONUS_H
 # define BONUS_H
-
 
 # include <sys/time.h>
 # include <semaphore.h>
@@ -29,10 +28,13 @@ typedef struct g_rules
 	int					dead;
 }	t_rules;
 
+struct	s_var;
+
 typedef struct s_philo
 {
 	int				id;
 	t_rules			*rules;
+	struct s_var	*vars;
 	unsigned long	last_m;
 	int				count;
 	int				pid;
@@ -47,7 +49,6 @@ typedef struct s_var
 	sem_t			*lock_printf;
 	t_philo			*philo;
 	pthread_t		*check;
-	
 }	t_vars;
 
 typedef struct s_atoi
@@ -56,13 +57,13 @@ typedef struct s_atoi
 	long	resultat;
 }	t_atoi;
 
-
-int				ft_atoi(char *str);
-void			handling(char *av, int rules, t_rules *input);
+int				ft_atoi(char *str, long *num);
+void			handling(char *av, long *num, int rules, t_rules *input);
 unsigned long	get_time(void);
 void			ft_usleep(int time);
 void			ft_printf(char *s, t_philo *philo, t_vars *vars);
 int				eat(t_philo *philo, t_rules *rl);
-
+void			g_bonus_rules(t_philo *philo, t_vars *vars);
+void			ft_kill(t_philo *philo);
 
 #endif

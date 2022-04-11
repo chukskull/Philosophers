@@ -12,7 +12,8 @@ HEADER_bonus = inc/bonus.h
 
 SRC = philo utils/ft_atoi utils/pars ft_usleep utils/get_time utils/printf global_rules check_eat
 
-SRC_bonus = bonus/main_bonus bonus/utils_bonus/ft_atoi_bonus bonus/utils_bonus/pars_bonus bonus/utils_bonus/get_time_bonus bonus/utils_bonus/printf bonus/utils_bonus/ft_usleep
+SRC_bonus = bonus/main_bonus bonus/utils_bonus/ft_atoi_bonus bonus/utils_bonus/pars_bonus bonus/utils_bonus/get_time_bonus \
+			bonus/utils_bonus/printf_bonus bonus/utils_bonus/ft_usleep_bonus bonus/utils_bonus/kill_bonus bonus/utils_bonus/g_rules_bonus
 
 OBJ = $(addprefix $(B_DIR)/, $(SRC:=.o))
 

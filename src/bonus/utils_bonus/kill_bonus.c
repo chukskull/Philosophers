@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_usleep.c                                        :+:      :+:    :+:   */
+/*   kill_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 21:58:11 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/10 23:14:20 by snagat           ###   ########.fr       */
+/*   Created: 2022/04/11 10:18:30 by snagat            #+#    #+#             */
+/*   Updated: 2022/04/11 10:28:24 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus.h"
-#include <unistd.h>
-#include <sys/time.h>
+#include <signal.h>
+#include <stdlib.h>
 
-void	ft_usleep(int time)
+void	ft_kill(t_philo *philo)
 {
-	unsigned long	cur_time;
-	unsigned long	breaker;
+	int	i;
 
-	cur_time = get_time();
-	breaker = cur_time + time;
-	usleep((time - 10) * 1000);
-	while (1)
+	i = 0;
+	while (i < philo->rules->philos_fork)
 	{
-		usleep(50);
-		cur_time = get_time();
-		if (cur_time == breaker)
-			break ;
+		kill(philo[i].pid, SIGTERM);
+		i++;
 	}
+	exit(0);
 }

@@ -6,12 +6,13 @@
 /*   By: snagat <snagat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 21:58:11 by snagat            #+#    #+#             */
-/*   Updated: 2022/04/11 09:44:35 by snagat           ###   ########.fr       */
+/*   Updated: 2022/04/11 09:24:52 by snagat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include "utils.h"
+#include "bonus.h"
+#include <unistd.h>
+#include <sys/time.h>
 
 void	ft_usleep(int time)
 {
@@ -23,7 +24,7 @@ void	ft_usleep(int time)
 	usleep((time - 10) * 1000);
 	while (1)
 	{
-		usleep(50);
+		usleep(200);
 		cur_time = get_time();
 		if (cur_time == breaker)
 			break ;
